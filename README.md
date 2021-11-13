@@ -9,7 +9,7 @@
 
 ## Using /give
 
-To use /give on an item, for example, use `/give @s fth:ingot{"ingot": "cobalt"}`
+To use /give on an item, for example, use `/give @s fth:ingot{"ingot": "cobalt"}`  
 Ingots and other's variants must be displayed in the [REI](https://github.com/shedaniel/RoughlyEnoughItems)
 
 ## Building From Source
