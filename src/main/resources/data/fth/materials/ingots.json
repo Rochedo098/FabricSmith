@@ -1,0 +1,24 @@
+[
+  {
+    "name": "steel",
+    "durability": 1000,
+    "miningSpeed": 10,
+    "attackDamage": 10,
+    "miningLevel": 3,
+    "repairIngredient": {
+      "base": "fth:ingot",
+      "ingot": "steel"
+    }
+  },
+  {
+    "name": "bronze",
+    "durability": 500,
+    "miningSpeed": 5,
+    "attackDamage": 5,
+    "miningLevel": 2,
+    "repairIngredient": {
+      "base": "fth:ingot",
+      "ingot": "bronze"
+    }
+  }
+]

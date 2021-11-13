@@ -1,32 +1,53 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "fth",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Fabric Smith",
+  "description": "I'm thinking on a description",
   "authors": [
-    "Me!"
+    "Rochedo098"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://rochedo098.github.io/",
+    "sources": "https://github.com/Rochedo098/FabricSmith"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleModKt::init"
+      {
+        "adapter": "kotlin",
+        "value": "com.github.rochedo098.fth.FabricSmith"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "com.github.rochedo098.fth.FabricSmithClient"
+      }
+    ],
+    "rei": [
+      {
+        "adapter": "kotlin",
+        "value": "com.github.rochedo098.fth.compat.rei.REIPlugin"
+      }
+    ],
+    "modmenu": [
+      {
+        "adapter": "kotlin",
+        "value": "com.github.rocedo098.fth.compat.modmenu.ModMenuConfig"
+      }
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "fth.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.8.7",
+    "fabricloader": ">=0.12.0",
     "fabric": "*",
     "fabric-language-kotlin": "*",
     "minecraft": "1.17.x"

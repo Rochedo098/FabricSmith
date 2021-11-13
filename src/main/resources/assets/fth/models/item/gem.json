@@ -1,0 +1,16 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fth:item/gems/default"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "nbt": {
+          "ingot": "default"
+        }
+      },
+      "model": "fth:item/gems/default"
+    }
+  ]
+}
