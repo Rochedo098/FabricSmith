@@ -16,19 +16,19 @@ object FTHItems {
 
     fun registerMaterials() {
         nuggets.forEach { nugget ->
-            Registry.register(Registry.ITEM, myIdentifier("${nugget}_nugget"), DynamicItem(itemSettings(), "nugget", nugget))
+            Registry.register(Registry.ITEM, myIdentifier("${nugget}_nugget"), DynamicItem(itemSettings(FTHItemGroups.GroupVariant.RESOURCES), "nugget", nugget))
         }
 
         ingots.forEach { ingot ->
-            Registry.register(Registry.ITEM, myIdentifier("${ingot}_ingot"), DynamicItem(itemSettings(), "ingot", ingot))
+            Registry.register(Registry.ITEM, myIdentifier("${ingot}_ingot"), DynamicItem(itemSettings(FTHItemGroups.GroupVariant.RESOURCES), "ingot", ingot))
         }
 
         slimes.forEach { slime ->
-            Registry.register(Registry.ITEM, myIdentifier("${slime}_slime"), DynamicItem(itemSettings(), "slime", slime))
+            Registry.register(Registry.ITEM, myIdentifier("${slime}_slime"), DynamicItem(itemSettings(FTHItemGroups.GroupVariant.RESOURCES), "slime", slime))
         }
 
         casts.forEach { cast ->
-            Registry.register(Registry.ITEM, myIdentifier("${cast}_cast"), DynamicItem(itemSettings(), "cast", cast))
+            Registry.register(Registry.ITEM, myIdentifier("${cast}_cast"), DynamicItem(itemSettings(FTHItemGroups.GroupVariant.OTHERS), "cast", cast))
         }
     }
 

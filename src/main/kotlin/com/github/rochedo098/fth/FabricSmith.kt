@@ -5,6 +5,7 @@ import com.github.rochedo098.fth.registry.FTHItemGroups
 import com.github.rochedo098.fth.registry.FTHItems
 import com.github.rochedo098.fth.smeltery.FTHSmelteryController.SEntity
 import com.github.rochedo098.fth.smeltery.FTHSmelteryTank.TEntity
+import com.github.rochedo098.fth.tables.FTHToolStation.TSEntity
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.entity.BlockEntityType
@@ -17,11 +18,13 @@ object FabricSmith: ModInitializer {
     fun myIdentifier(identifier: String): Identifier = Identifier(namespace, identifier)
 
     fun getItemHelper(identifier: String): Item = Registry.ITEM.get(myIdentifier(identifier))
-    fun itemSettings(): Item.Settings = Item.Settings().group(FTHItemGroups.GROUP)
+    fun itemSettings(groupVariant: FTHItemGroups.GroupVariant): Item.Settings = Item.Settings().group(FTHItemGroups.getGroup(groupVariant))
 
     // Block Entity's
     var SMELTERY_CONTROLLER_ENTITY: BlockEntityType<SEntity>? = null
     var SMELTERY_TANK_ENTITY: BlockEntityType<TEntity>? = null
+
+    var TOOL_STATION_ENTITY: BlockEntityType<TSEntity>? = null
 
     override fun onInitialize() {
         // Registry Block's
@@ -37,5 +40,8 @@ object FabricSmith: ModInitializer {
 
         SMELTERY_TANK_ENTITY = FabricBlockEntityTypeBuilder.create(::TEntity, FTHBlocks.SMELTERY_TANK_BLOCK).build(null)
         Registry.register(Registry.BLOCK_ENTITY_TYPE, myIdentifier("smeltery_tank_entity"), SMELTERY_TANK_ENTITY)
+
+        TOOL_STATION_ENTITY = FabricBlockEntityTypeBuilder.create(::TSEntity, FTHBlocks.TOOL_STATION_BLOCK).build(null)
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, myIdentifier("tool_station_entity"), TOOL_STATION_ENTITY)
     }
 }
