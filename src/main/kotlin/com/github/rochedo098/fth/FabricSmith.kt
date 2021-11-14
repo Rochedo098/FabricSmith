@@ -5,26 +5,19 @@ import com.github.rochedo098.fth.registry.FTHItemGroups
 import com.github.rochedo098.fth.registry.FTHItems
 import com.github.rochedo098.fth.smeltery.FTHSmelteryController.SEntity
 import com.github.rochedo098.fth.smeltery.FTHSmelteryTank.TEntity
-import com.glisco.owo.itemgroup.OwoItemSettings
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.item.Item
-import net.minecraft.item.ItemGroup
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 object FabricSmith: ModInitializer {
-    fun myIdentifier(identifier: String): Identifier = Identifier("fth", identifier)
+    const val namespace: String = "fth"
+    fun myIdentifier(identifier: String): Identifier = Identifier(namespace, identifier)
+
     fun getItemHelper(identifier: String): Item = Registry.ITEM.get(myIdentifier(identifier))
-    enum class GroupTypes{ MATERIALS, PARTS, SMELTERY }
-    fun itemSettings(group: GroupTypes): Item.Settings {
-        return when (group) {
-            GroupTypes.MATERIALS -> OwoItemSettings().group(FTHItemGroups.GROUP).tab(1)
-            GroupTypes.PARTS -> OwoItemSettings().group(FTHItemGroups.GROUP).tab(2)
-            GroupTypes.SMELTERY -> OwoItemSettings().group(FTHItemGroups.GROUP).tab(3)
-        }
-    }
+    fun itemSettings(): Item.Settings = Item.Settings().group(FTHItemGroups.GROUP)
 
     // Block Entity's
     var SMELTERY_CONTROLLER_ENTITY: BlockEntityType<SEntity>? = null

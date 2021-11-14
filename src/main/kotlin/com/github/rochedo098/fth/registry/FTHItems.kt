@@ -1,9 +1,11 @@
 package com.github.rochedo098.fth.registry
 
 import com.github.rochedo098.fth.FabricSmith
-import com.github.rochedo098.fth.FabricSmith.myIdentifier
 import com.github.rochedo098.fth.FabricSmith.itemSettings
+import com.github.rochedo098.fth.FabricSmith.myIdentifier
 import net.minecraft.item.Item
+import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.registry.Registry
 
 object FTHItems {
@@ -14,23 +16,25 @@ object FTHItems {
 
     fun registerMaterials() {
         nuggets.forEach { nugget ->
-            Registry.register(Registry.ITEM, myIdentifier("${nugget}_nugget"), Item(itemSettings(FabricSmith.GroupTypes.MATERIALS)))
+            Registry.register(Registry.ITEM, myIdentifier("${nugget}_nugget"), DynamicItem(itemSettings(), "nugget", nugget))
         }
 
         ingots.forEach { ingot ->
-            Registry.register(Registry.ITEM, myIdentifier("${ingot}_ingot"), Item(itemSettings(FabricSmith.GroupTypes.MATERIALS)))
+            Registry.register(Registry.ITEM, myIdentifier("${ingot}_ingot"), DynamicItem(itemSettings(), "ingot", ingot))
         }
 
         slimes.forEach { slime ->
-            Registry.register(Registry.ITEM, myIdentifier("${slime}_slime"), Item(itemSettings(FabricSmith.GroupTypes.MATERIALS)))
+            Registry.register(Registry.ITEM, myIdentifier("${slime}_slime"), DynamicItem(itemSettings(), "slime", slime))
         }
 
         casts.forEach { cast ->
-            Registry.register(Registry.ITEM, myIdentifier("${cast}_cast"), Item(itemSettings(FabricSmith.GroupTypes.MATERIALS)))
+            Registry.register(Registry.ITEM, myIdentifier("${cast}_cast"), DynamicItem(itemSettings(), "cast", cast))
         }
     }
 
-    fun registerTools() {
-
+    class DynamicItem(settings: Settings, val item: String, val variant: String): Item(settings) {
+        override fun getName(): Text {
+            return TranslatableText("item.${FabricSmith.namespace}.$item.$variant")
+        }
     }
 }

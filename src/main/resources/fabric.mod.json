@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "fth",
   "version": "${version}",
 
   "name": "Fabric Smith",
@@ -27,7 +27,7 @@
     "client": [
       {
         "adapter": "kotlin",
-        "value": "com.github.rochedo098.fth.FabricSmith"
+        "value": "com.github.rochedo098.fth.FabricSmithClient"
       }
     ],
     "rei": [
@@ -38,7 +38,7 @@
     ]
   },
   "mixins": [
-    "fth.mixins.json"
+
   ],
   "depends": {
     "fabricloader": ">=0.8.7",

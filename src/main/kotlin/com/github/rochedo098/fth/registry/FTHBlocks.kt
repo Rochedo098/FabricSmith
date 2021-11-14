@@ -21,7 +21,7 @@ object FTHBlocks {
     fun register() {
         metal_blocks.forEach { mblock ->
             val BLOCK = Registry.register(Registry.BLOCK, myIdentifier("${mblock}_block"), Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)))
-            Registry.register(Registry.ITEM, myIdentifier("${mblock}_block"), BlockItem(BLOCK, itemSettings(FabricSmith.GroupTypes.MATERIALS)))
+            Registry.register(Registry.ITEM, myIdentifier("${mblock}_block"), BlockItem(BLOCK, itemSettings()))
         }
     }
 
