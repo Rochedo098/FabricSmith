@@ -3,6 +3,7 @@ package com.github.rochedo098.fth
 import com.github.rochedo098.fth.registry.FTHBlocks
 import com.github.rochedo098.fth.registry.FTHItemGroups
 import com.github.rochedo098.fth.registry.FTHItems
+import com.github.rochedo098.fth.registry.GroupVariant
 import com.github.rochedo098.fth.smeltery.FTHSmelteryController.SEntity
 import com.github.rochedo098.fth.smeltery.FTHSmelteryTank.TEntity
 import com.github.rochedo098.fth.tables.FTHToolStation.TSEntity
@@ -18,7 +19,7 @@ object FabricSmith: ModInitializer {
     fun myIdentifier(identifier: String): Identifier = Identifier(namespace, identifier)
 
     fun getItemHelper(identifier: String): Item = Registry.ITEM.get(myIdentifier(identifier))
-    fun itemSettings(groupVariant: FTHItemGroups.GroupVariant): Item.Settings = Item.Settings().group(FTHItemGroups.getGroup(groupVariant))
+    fun itemSettings(groupVariant: GroupVariant): Item.Settings = Item.Settings().group(FTHItemGroups.getGroup(groupVariant))
 
     // Block Entity's
     var SMELTERY_CONTROLLER_ENTITY: BlockEntityType<SEntity>? = null
@@ -29,10 +30,7 @@ object FabricSmith: ModInitializer {
     override fun onInitialize() {
         // Registry Block's
         FTHBlocks.register()
-        FTHBlocks.registerSmeltery()
-
-        // Registry Item's
-        FTHItems.registerMaterials()
+        FTHItems.register()
 
         // Registry Block Entity's
         SMELTERY_CONTROLLER_ENTITY = FabricBlockEntityTypeBuilder.create(::SEntity, FTHBlocks.SMELTERY_CONTROLLER_BLOCK).build(null)

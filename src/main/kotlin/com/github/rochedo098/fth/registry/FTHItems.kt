@@ -3,38 +3,43 @@ package com.github.rochedo098.fth.registry
 import com.github.rochedo098.fth.FabricSmith
 import com.github.rochedo098.fth.FabricSmith.itemSettings
 import com.github.rochedo098.fth.FabricSmith.myIdentifier
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.Item
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.registry.Registry
 
 object FTHItems {
-    val nuggets: Array<String> = arrayOf("cobalt", "ardite", "manyullyn", "copper", "tin", "aluminium", "bronze", "aluminium_brass", "alumite", "steel", "obsidian", "pig_iron")
-    val ingots: Array<String> = arrayOf("cobalt", "ardite", "manyullyn", "copper", "tin", "aluminium", "bronze", "aluminium_brass", "alumite", "steel", "obsidian", "pig_iron")
-    val slimes: Array<String> = arrayOf("white", "light_gray", "gray", "black", "brown", "red", "orange", "yellow", "lime", "green", "cyan", "light_blue", "blue", "purple", "magenta", "pink")
+    // Variants
+    val materials: Array<String> = arrayOf("cobalt", "ardite", "manyullyn", "copper", "tin", "aluminium", "bronze", "aluminium_brass", "alumite", "steel", "obsidian", "pig_iron")
+    val slimes: Array<String> = arrayOf("white", "light_gray", "gray", "black", "brown", "red", "orange", "yellow", "green", "cyan", "light_blue", "blue", "purple", "magenta", "pink")
     val casts: Array<String> = arrayOf("blank", "rod", "binding", "sword_blade", "pickaxe_head", "axe_head", "shovel_head", "hoe_head")
 
-    fun registerMaterials() {
-        nuggets.forEach { nugget ->
-            Registry.register(Registry.ITEM, myIdentifier("${nugget}_nugget"), DynamicItem(itemSettings(FTHItemGroups.GroupVariant.RESOURCES), "nugget", nugget))
-        }
+    private fun item(id: String, group: GroupVariant, maxCount: Int = 64) = Registry.register(Registry.ITEM, myIdentifier(id), Item(itemSettings(group).maxCount(maxCount)))
+    private fun item(id: String, item: Item) = Registry.register(Registry.ITEM, myIdentifier(id), item)
 
-        ingots.forEach { ingot ->
-            Registry.register(Registry.ITEM, myIdentifier("${ingot}_ingot"), DynamicItem(itemSettings(FTHItemGroups.GroupVariant.RESOURCES), "ingot", ingot))
+    fun register() {
+        // Resources
+        materials.forEach { material ->
+            item("${material}_nugget", GroupVariant.RESOURCES)
+            item("${material}_ingot", GroupVariant.RESOURCES)
+
+            // Heads
+            item("${material}_rod", GroupVariant.PARTS)
+            item("${material}_binding", GroupVariant.PARTS)
+            item("${material}_sword_blade", GroupVariant.PARTS)
+            item("${material}_pickaxe_head", GroupVariant.PARTS)
+            item("${material}_axe_head", GroupVariant.PARTS)
+            item("${material}_shovel_head", GroupVariant.PARTS)
+            item("${material}_hoe_head", GroupVariant.PARTS)
         }
 
         slimes.forEach { slime ->
-            Registry.register(Registry.ITEM, myIdentifier("${slime}_slime"), DynamicItem(itemSettings(FTHItemGroups.GroupVariant.RESOURCES), "slime", slime))
+            item("${slime}_slime", GroupVariant.RESOURCES)
         }
 
         casts.forEach { cast ->
-            Registry.register(Registry.ITEM, myIdentifier("${cast}_cast"), DynamicItem(itemSettings(FTHItemGroups.GroupVariant.OTHERS), "cast", cast))
-        }
-    }
-
-    class DynamicItem(settings: Settings, val item: String, val variant: String): Item(settings) {
-        override fun getName(): Text {
-            return TranslatableText("item.${FabricSmith.namespace}.$item.$variant")
+            item("${cast}_cast", GroupVariant.OTHERS)
         }
     }
 }
